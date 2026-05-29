@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> carm Inventory System</title>
+   <link rel="stylesheet" href="invert.css">
+</head>
+<body> 
+
+<h2> 📦  Inventory Management System</h2>
+
+<!-- Add Product -->
+<h3>Add Product</h3>
+<input type="text" id="name" placeholder="Product Name">
+<input type="number" id="price" placeholder="Price">
+<input type="number" id="quantity" placeholder="Quantity">
+<button onclick="addProduct()">Add</button>
+
+<!-- Sell Product -->
+<h3>Sell Product</h3>
+<input type="text" id="sellName" placeholder="Product Name">
+<input type="number" id="sellQty" placeholder="Quantity">
+<button onclick="sellProduct()">Sell</button>
+
+<!-- Display -->
+<h3>Inventory List</h3>
+<button onclick="displayInventory()">Refresh</button>
+
+<table id="inventoryTable">
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Status</th>
+    </tr>
+</table>
+<script>
+const API = "http://localhost:3000";
+
+// ➕ Add Product
+async function addProduct() {
+    let name = document.getElementById("name").value;
+    let price = parseFloat(document.getElementById("price").value);
+    let quantity = parseInt(document.getElementById("quantity").value);
+
+    await fetch(`${API}/add`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, price, quantity })
+    });
+
+    alert("Product added!");
+    displayInventory();
+}
+
+// 💰 Sell Product
+async function sellProduct() {
+    let name = document.getElementById("sellName").value;
+    let qty = parseInt(document.getElementById("sellQty").value);
+
+    let res = await fetch(`${API}/sell`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, qty })
+    });
+
+    alert(await res.text());
+    displayInventory();
+}
+
+// 📋 Display Inventory
+async function displayInventory() {
+    let res = await fetch(`${API}/products`);
+    let data = await res.json();
+
+    let table = document.getElementById("inventoryTable");
+
+    table.innerHTML = `
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Status</th>
+        </tr>
+    `;
+
+    data.forEach(p => {
+        let status = p.quantity > 0 ? "In Stock" : "Out of Stock";
+
+        table.innerHTML += `
+            <tr>
+                <td>${p.name}</td>
+                <td>${p.price}</td>
+                <td>${p.quantity}</td>
+                <td>${status}</td>
+            </tr>
+        `;
+    });
+}
+let inventory = [];
+
+// ➕ Add Product
+function addProduct() {
+    let name = document.getElementById("name").value;
+    let price = parseFloat(document.getElementById("price").value);
+    let quantity = parseInt(document.getElementById("quantity").value);
+
+    if (name && price > 0 && quantity >= 0) {
+        inventory.push({ name, price, quantity });
+        alert("Product added!");
+        displayInventory();
+    } else {
+        alert("Enter valid details");
+    }
+}
+
+// 💰 Sell Product
+function sellProduct() {
+    let name = document.getElementById("sellName").value;
+    let qty = parseInt(document.getElementById("sellQty").value);
+
+    let product = inventory.find(p => p.name === name);
+
+    if (product) {
+        if (product.quantity >= qty && qty > 0) { // comparison + logical
+            product.quantity -= qty; // arithmetic + assignment
+            alert("Sale successful!");
+        } else {
+            alert("Not enough stock!");
+        }
+    } else {
+        alert("Product not found!");
+    }
+
+    displayInventory();
+}
+
+// 📋 Display Inventory
+function displayInventory() {
+    let table = document.getElementById("inventoryTable");
+
+    // Clear table (except header)
+    table.innerHTML = `
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Status</th>
+        </tr>
+    `;
+
+    inventory.forEach(p => {
+        let status = p.quantity > 0 ? "In Stock" : "Out of Stock"; // ternary
+
+        let row = `
+            <tr>
+                <td>${p.name}</td>
+                <td>${p.price}</td>
+                <td>${p.quantity}</td>
+                <td>${status}</td>
+            </tr>
+        `;
+
+        table.innerHTML += row;
+    });
+}
+</script>
