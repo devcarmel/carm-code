@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="IE=edge">
+        <meta name="viewport" content="width-device-width, initial-scale=1.8">
+        <title> transparent login form</title>
+        <link rel="stylesheet" href="https://dash.cloudflare.com/df5cd9845c615d077c03f4418558fef3/welcome">
+        <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-img">
+    <div class="content">
+    <header> login here</header>
+    <form action="#">
+    <div class="field">
+        
+        
+
+
+    </div>
+    <div class="field space">
+    <i class="fa fa-lock"></i>
+    <input type="user name" class="name" placeholder="enter user name" required /><br>
+    <br>
+    <input type="password" class="characters" placeholder="enter your password" require />
+    </div>
+    <div class="pass">
+        <br>
+    <a href="#">forget password?</a>
+
+    </div>
+    <div class="field"><br>
+        <input type="submit" value="login">
+        
+    </div>
+    <form>
+        <div class="login">or login with</div>
+        <div class="links">
+        <div class="facebook">
+        <i class="fa fa-facebbok"> <pan>facebook</pan></i>
+        </div>
+        <div class="gmail">
+            <i class="fa fa-envelope"> <span>g-mail</span></i>
+        
+
+        </div>
+        </div>
+        <div class="signup">don't have an account? <a href="#">signup now</a>
+
+        </div>
+     </div>
+</div>
+<style>
+    
+        /*set background image for the whole page*/
+        body{
+            margin: 0;
+            height: 100vh;
+            background-image:
+            url('background.jpg'); /*"C:\Users\YM\Downloads\IMG-20250823-WA0134~2.jpg" */
+            background-size: cover; /* makes the image cover the page */
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+        
+    
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+    
+.bg-img::after{
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+}
+.content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 999;
+    text-align: center;
+    padding: 60px 30px;
+    width: 370px;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.75);
+}
+.content header{
+    color: rgb(39, 243, 243);
+    font-size: 35px;
+    font-weight: 600;
+    margin-bottom: 35px;
+    font-family: 'montserrat',sans-serif;
+}
+.fieldinput{
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+.login{
+    color: white;
+    margin: 20px 0px;
+    font-family: 'poppins'sans-serif;
+
+}
+.links{
+    display: flex;
+    cursor: pointer;
+    color: white;
+    margin-bottom: 20px;
+}
+.facebook, .gmail{
+    width: 100px;
+    height: 45px;
+    line-height: 45px;
+    margin-left: 10px;
+
+}
+.facebook{
+    margin-left: 0;
+    background: #043495;
+    border: 1px solid #477dea;
+
+
+}
+.gmail{
+    background: #e63f3f;
+    border: 1px solid #570808;
+
+}
+.facebook:hover{
+    background: #c773ec;
+}
+.gmail:hover{
+    background: #c73e3e;
+
+}
+.links{
+    font-size: 17px;
+
+}
+i span{
+    margin-left: 8px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-size: 16px;
+    font-family: 'poppins',sans-serif;
+
+}
+.signup{
+    margin-left: 8px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-size: 16px;
+    font-family: 'poppins',sans-serif;
+}
+.signup a{
+    color: #200eec;
+    text-decoration: none;
+
+}
+.signup a:hover{
+    text-decoration: underline;
+}
+
+
+
+</style>
+    
+</body>
+</html>
